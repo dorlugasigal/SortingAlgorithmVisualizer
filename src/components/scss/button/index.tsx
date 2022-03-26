@@ -6,9 +6,9 @@ import { eventNames } from "process";
 export const MyButton: React.FC<IButton> = ({ children, ...props }) => {
     return (
         <Button
+            className={styles.button}
             onClick={props.onClick}
             type="primary"
-            shape="round"
             size="large"
         >
             {props.label}

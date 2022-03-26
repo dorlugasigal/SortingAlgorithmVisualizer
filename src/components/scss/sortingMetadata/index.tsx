@@ -4,37 +4,21 @@ import { Slider, InputNumber, Row, Col } from "antd";
 
 export type ISortingMetadata = {
     onChange: (text: any) => void;
+    defaultValue: number;
 };
 
 export const SortingMetadata: React.FC<ISortingMetadata> = ({
     children,
     ...props
 }) => {
-    const [amount, setAmount] = useState(10);
-    const onChange = (value: any) => {
-        setAmount(value);
-        props.onChange(value);
-    };
-
     return (
-        <Row className={styles.row}>
-            <Col span={12}>
-                <Slider
-                    min={10}
-                    max={100}
-                    onChange={onChange}
-                    value={typeof amount === "number" ? amount : 0}
-                />
-            </Col>
-            <Col span={4}>
-                <InputNumber
-                    min={10}
-                    max={100}
-                    style={{ margin: "0 16px" }}
-                    value={amount}
-                    onChange={onChange}
-                />
-            </Col>
-        </Row>
+        <Slider
+            style={{ width: "50%" }}
+            min={10}
+            max={100}
+            defaultValue={props.defaultValue}
+            tooltipVisible
+            onChange={props.onChange}
+        />
     );
 };
