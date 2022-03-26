@@ -6,7 +6,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
         "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'",
         "test": "jest -c test/jest.config.js"
     },
