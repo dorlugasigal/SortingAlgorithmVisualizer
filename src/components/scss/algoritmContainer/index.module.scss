@@ -1,4 +1,4 @@
-.cards {
+.wrapper {
     display: flex;
     flex-flow: row wrap;
     flex: 1;
@@ -6,12 +6,5 @@
 
     @media (max-width: 575px) {
         flex-direction: column;
-    }
-}
-
-.cardWrapper {
-    width: 25%;
-    @media (max-width: 575px) {
-        width: 100%;
     }
 }

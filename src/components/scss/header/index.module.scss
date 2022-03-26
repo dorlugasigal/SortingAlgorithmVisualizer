@@ -1,4 +1,17 @@
 .header {
-    background-color: #20232a;
+    background-color: #282c34;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
     text-align: center;
+    padding: 2rem 0;
+
+    h1 {
+        color: #ffffff;
+        font-size: 2.875rem;
+    }
+
+    p {
+        font-size: 1.125rem;
+    }
 }

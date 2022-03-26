@@ -1,7 +1,5 @@
 export { Header } from "./header";
 export { Logo } from "./logo";
-export { Main } from "./main";
 export { Button } from "./button";
-export { Card } from "./card";
-export { Cards } from "./cards";
+export { AlgorithmContainer  } from "./algoritmContainer";
 export { Footer } from "./footer";
