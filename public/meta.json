@@ -1,0 +1,45 @@
+{
+    "name": "sorting-visualizer",
+    "plugins": [
+        {
+            "name": "SASS/SCSS",
+            "description": "Sass is a stylesheet language that’s compiled to CSS. It allows you to use variables, nested rules, mixins, functions, and more, all with a fully CSS-compatible syntax.",
+            "url": "https://sass-lang.com/documentation"
+        },
+        {
+            "name": "Fetch",
+            "description": "Next.js has a built-in polyfill for the fetch API. You don't need to worry about using it on either server or client side.",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"
+        },
+        {
+            "name": "SWR",
+            "description": "React Hooks library for data fetching from Vercel",
+            "url": "https://swr.vercel.app/"
+        },
+        {
+            "name": "ESLint",
+            "description": "A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript. Maintain your code quality with ease.",
+            "url": "https://eslint.org/docs/user-guide/getting-started"
+        },
+        {
+            "name": "Prettier",
+            "description": "An opinionated code formatter; Supports many languages; Integrates with most editors.",
+            "url": "https://prettier.io/docs/en/index.html"
+        },
+        {
+            "name": "Jest",
+            "description": "Jest is a delightful JavaScript Testing Framework with a focus on simplicity.",
+            "url": "https://jestjs.io/docs/en/getting-started"
+        },
+        {
+            "name": "Docker",
+            "description": "Docker simplifies and accelerates your workflow, while giving developers the freedom to innovate with their choice of tools, application stacks, and deployment environments for each project.",
+            "url": "https://www.docker.com/get-started"
+        },
+        {
+            "name": "Github Actions",
+            "description": "GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub.",
+            "url": "https://docs.github.com/en/actions"
+        }
+    ]
+}
