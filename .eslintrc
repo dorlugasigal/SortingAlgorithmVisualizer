@@ -15,7 +15,6 @@
         "browser": true,
         "amd": true
     },
-    "semi": ["never"],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
