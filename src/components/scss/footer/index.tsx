@@ -6,8 +6,11 @@ import styles from "./index.module.scss";
 export const Footer: React.FC = () => {
     return (
         <div className={styles.footer}>
-                       <div className={styles.icons}>
-                <a href="https://github.com/dorlugasigal/SortingAlgorithmVisualizer" target="_blank">
+            <div className={styles.icons}>
+                <a
+                    href="https://github.com/dorlugasigal/SortingAlgorithmVisualizer"
+                    target="_blank"
+                >
                     <Image
                         src="/icons/github-icon.svg"
                         alt="github"

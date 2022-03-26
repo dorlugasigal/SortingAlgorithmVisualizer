@@ -9,11 +9,12 @@ export const Header: React.FC = () => {
     return (
         <div className={styles.header}>
             <Logo withTitle />
-            {[123,456,678].map(item=><a>{item}</a>)}
-            {/* <>
+            <>
                 <a
                     onClick={() =>
-                        router.push("/?sortType=binary", undefined, { shallow: true })
+                        router.push("/?sortType=binary", undefined, {
+                            shallow: true,
+                        })
                     }
                 >
                     Value 1
@@ -21,12 +22,14 @@ export const Header: React.FC = () => {
 
                 <a
                     onClick={() =>
-                        router.push("/?sortType=bubble", undefined, { shallow: true })
+                        router.push("/?sortType=bubble", undefined, {
+                            shallow: true,
+                        })
                     }
                 >
                     Value 2
                 </a>
-            </> */}
+            </>
         </div>
     );
 };

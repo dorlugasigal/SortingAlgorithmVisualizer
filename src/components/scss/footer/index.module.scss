@@ -4,7 +4,7 @@
     align-items: center;
     background-color: #282c34;
     color: #ffffff;
-    padding: 2rem 0;
+    padding: 0.5rem 0;
 }
 .content {
     display: flex;
@@ -12,8 +12,8 @@
     align-items: center;
 }
 .icons {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     a:not(:last-child) {
-        margin-right: 1.5rem;
+        margin-right: 1rem;
     }
 }

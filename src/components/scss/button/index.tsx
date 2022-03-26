@@ -1,21 +1,22 @@
 import React from "react";
+import { Button } from "antd";
 import styles from "./index.module.scss";
+import { eventNames } from "process";
 
-export type IButton = React.DetailedHTMLProps<
-    React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    HTMLAnchorElement
->;
-
-export const Button: React.FC<IButton> = ({ children, ...props }) => {
+export const MyButton: React.FC<IButton> = ({ children, ...props }) => {
     return (
-        <a
-            {...props}
-            target="_blank"
-            href="https://pankod.github.io/superplate/"
-            rel="noopener noreferrer"
-            className={styles.button}
+        <Button
+            onClick={props.onClick}
+            type="primary"
+            shape="round"
+            size="large"
         >
-            {children}
-        </a>
+            {props.label}
+        </Button>
     );
+};
+
+type IButton = {
+    label: string;
+    onClick: (text: any) => void;
 };
