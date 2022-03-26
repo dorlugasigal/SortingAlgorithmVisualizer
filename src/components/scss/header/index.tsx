@@ -9,7 +9,8 @@ export const Header: React.FC = () => {
     return (
         <div className={styles.header}>
             <Logo withTitle />
-            <>
+            {[123,456,678].map(item=><a>{item}</a>)}
+            {/* <>
                 <a
                     onClick={() =>
                         router.push("/?sortType=binary", undefined, { shallow: true })
@@ -25,7 +26,7 @@ export const Header: React.FC = () => {
                 >
                     Value 2
                 </a>
-            </>
+            </> */}
         </div>
     );
 };
