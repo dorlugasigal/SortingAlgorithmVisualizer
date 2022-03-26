@@ -10,15 +10,15 @@ export const AlgorithmContainer: React.FC = () => {
     const router = useRouter();
     useEffect(() => generate(), []);
     useEffect(() => undefined, [router.query.sortType]);
-    const { width, height } = useWindowDimensions();
+    const { width } = useWindowDimensions();
 
     const DEAFULT_VALUE = 30;
     const [amount, setAmount] = useState(DEAFULT_VALUE);
-    const [array, setArray] = useState([]);
+    const [array, setArray] = useState<number[]>([]);
 
     const generate = () => {
-        var arr = [] as any;
-        for (var i = 0; i < amount; i++) {
+        const arr = [] as number[];
+        for (let i = 0; i < amount; i++) {
             arr.push(Math.round(Math.random() * 200) + 1);
         }
         arr.sort((a: number, b: number) => a - b);

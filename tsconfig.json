@@ -44,7 +44,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/hooks/windowDimension.js"  ],
   "exclude": [
     "node_modules"
   ]

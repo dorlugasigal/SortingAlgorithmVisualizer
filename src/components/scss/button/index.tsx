@@ -1,9 +1,8 @@
 import React from "react";
 import { Button } from "antd";
 import styles from "./index.module.scss";
-import { eventNames } from "process";
 
-export const MyButton: React.FC<IButton> = ({ children, ...props }) => {
+export const MyButton: React.FC<IButton> = ({ ...props }) => {
     return (
         <Button
             className={styles.button}
@@ -18,5 +17,5 @@ export const MyButton: React.FC<IButton> = ({ children, ...props }) => {
 
 type IButton = {
     label: string;
-    onClick: (text: any) => void;
+    onClick: () => void;
 };
