@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import styles from "./index.module.scss";
-import { Slider, InputNumber, Row, Col } from "antd";
+import React from "react";
+import { Slider } from "antd";
 
 export type ISortingMetadata = {
-    onChange: (text: any) => void;
+    onChange: () => void;
     defaultValue: number;
 };
 
-export const SortingMetadata: React.FC<ISortingMetadata> = ({
-    children,
-    ...props
-}) => {
+export const SortingMetadata: React.FC<ISortingMetadata> = ({ ...props }) => {
     return (
         <Slider
             style={{ width: "50%" }}
