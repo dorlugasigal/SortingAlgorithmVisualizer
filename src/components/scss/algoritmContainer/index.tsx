@@ -7,6 +7,7 @@ import styles from "./index.module.scss";
 export const AlgorithmContainer: React.FC = () => {
     const router = useRouter();
 
-    useEffect(() => {}, [router.query.value]);
-    return <div className={styles.wrapper}>{router.query.value}</div>;
+    useEffect(() => {}, [router.query.sortType]);
+    
+    return <div className={styles.wrapper}>{router.query.sortType}</div>;
 };

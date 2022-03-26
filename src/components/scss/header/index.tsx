@@ -12,7 +12,7 @@ export const Header: React.FC = () => {
             <>
                 <a
                     onClick={() =>
-                        router.push("/?value=1", undefined, { shallow: true })
+                        router.push("/?sortType=binary", undefined, { shallow: true })
                     }
                 >
                     Value 1
@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
 
                 <a
                     onClick={() =>
-                        router.push("/?value=2", undefined, { shallow: true })
+                        router.push("/?sortType=bubble", undefined, { shallow: true })
                     }
                 >
                     Value 2
