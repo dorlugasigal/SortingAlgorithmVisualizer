@@ -25,11 +25,12 @@
         display: flex;
         justify-content: center;
         .barsContainer {
-            width: 70%;
             justify-content: center;
             display: flex;
             flex-direction: row;
             align-items: flex-end;
+            .barContainer {
+            }
         }
     }
 }

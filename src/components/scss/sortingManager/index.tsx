@@ -14,7 +14,7 @@ export const SortingManager: React.FC<SortingManagerProps> = (props) => {
         <div className={styles.row}>
             <Slider
                 className={styles.slider}
-                min={10}
+                min={2}
                 max={100}
                 defaultValue={props.DEAFULT_VALUE}
                 tooltipVisible

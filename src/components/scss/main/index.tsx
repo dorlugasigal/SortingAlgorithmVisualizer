@@ -44,7 +44,9 @@ export const Main: React.FC = () => {
     };
 
     const calculateWidth = () => {
-        const widthCalculated = (width ?? window.innerWidth - 100) / amount;
+        const widthCalculated =
+            ((width ?? window.innerWidth) * 0.7) / amount -
+            2 * (amount * -0.03 + 4);
         return widthCalculated;
     };
 
@@ -59,15 +61,19 @@ export const Main: React.FC = () => {
             <div className={styles.barsContainerWrapper}>
                 <div className={styles.barsContainer}>
                     {array.map((item, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                height: `${item * 3}px`,
-                                width: `${calculateWidth()}vw`,
-                                margin: "5px",
-                                backgroundColor: decideColor(index),
-                            }}
-                        ></div>
+                        <div className={styles.barContainer}>
+                            <div
+                                key={index}
+                                title={item.toString()}
+                                style={{
+                                    height: `${item * 3}px`,
+                                    width: `${calculateWidth()}px`,
+                                    margin: `${amount * -0.03 + 4}px`,
+                                    backgroundColor: decideColor(index),
+                                }}
+                            ></div>
+                            <div>{1}</div>
+                        </div>
                     ))}
                 </div>
             </div>
