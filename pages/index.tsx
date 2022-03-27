@@ -1,7 +1,6 @@
 import React from "react";
 import "antd/dist/antd.css";
-
-import { Header, AlgorithmContainer, Footer } from "@components/scss";
+import { Header, Main, Footer } from "@components/scss";
 
 const Home: React.FC = () => {
     return (
@@ -14,7 +13,7 @@ const Home: React.FC = () => {
             }}
         >
             <Header />
-            <AlgorithmContainer />
+            <Main />
             <Footer />
         </div>
     );

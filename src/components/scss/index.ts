@@ -1,6 +1,5 @@
 export { Header } from "./header";
 export { Logo } from "./logo";
-export { MyButton } from "./button";
-export { AlgorithmContainer } from "./algoritmContainer";
+export { Main } from "./main";
 export { Footer } from "./footer";
-export { SortingMetadata } from "./sortingMetadata";
+export { SortingManager } from "./sortingManager";
