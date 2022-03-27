@@ -30,6 +30,13 @@
             flex-direction: row;
             align-items: flex-end;
             .barContainer {
+                justify-items: center;
+                .barNumber {
+                    font-family: "Courier New", Courier, monospace;
+                    text-align: center;
+                    color: white;
+                    font-weight: bold;
+                }
             }
         }
     }

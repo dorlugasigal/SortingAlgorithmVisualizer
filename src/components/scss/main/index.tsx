@@ -66,13 +66,22 @@ export const Main: React.FC = () => {
                                 key={index}
                                 title={item.toString()}
                                 style={{
-                                    height: `${item * 3}px`,
+                                    height: `${item * 3 + 22}px`,
                                     width: `${calculateWidth()}px`,
                                     margin: `${amount * -0.03 + 4}px`,
+                                    marginBottom: `${amount * -0.03 + 4}px`,
                                     backgroundColor: decideColor(index),
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "flex-end",
                                 }}
-                            ></div>
-                            <div>{1}</div>
+                            >
+                                {amount <= 40 && (
+                                    <div className={styles.barNumber}>
+                                        {item}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>
