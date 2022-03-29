@@ -2,6 +2,7 @@ import useWindowDimensions from "../../../hooks/windowDimension";
 import styles from "./index.module.scss";
 import React, { useEffect } from "react";
 import { Step } from "../main";
+
 type VisualizerType = {
     array: number[];
     amount: number;
