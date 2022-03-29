@@ -37,8 +37,11 @@
         transition: all 0.3s ease-in-out;
 
         &:hover {
-            background-color: lighten(#47306c, 20%);
-            .ant-btn-dangerous:focus + {
+            .ant-btn-primary {
+                background-color: lighten(#47306c, 20%);
+            }
+
+            .ant-btn-dangerous {
                 background-color: #ff4d4f;
             }
             &:disabled {
