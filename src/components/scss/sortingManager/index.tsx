@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Slider } from "antd";
 import styles from "./index.module.scss";
 

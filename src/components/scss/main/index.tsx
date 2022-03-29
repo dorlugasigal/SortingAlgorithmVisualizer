@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { SortingManager } from "../sortingManager";
 import { Visualizer } from "../visualizer";
 import styles from "./index.module.scss";
-import { StepsProps } from "antd";
 
 export interface Step {
     highlightRange: number[];

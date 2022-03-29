@@ -1,6 +1,6 @@
 import useWindowDimensions from "../../../hooks/windowDimension";
 import styles from "./index.module.scss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Step } from "../main";
 type VisualizerType = {
     array: number[];
@@ -10,17 +10,19 @@ type VisualizerType = {
 };
 
 export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
-    const { array, amount, steps ,currentStepIndex} = props;
+    const { array, amount, steps, currentStepIndex } = props;
     const currentStep = steps[currentStepIndex] ?? null;
     const { width } = useWindowDimensions();
-    useEffect(()=>{
-        if (currentStep && currentStep.swap)
-        {
-            swap(array,currentStep.highlightElementAtIndex[0],currentStep.highlightElementAtIndex[1])
+    useEffect(() => {
+        if (currentStep && currentStep.swap) {
+            swap(
+                array,
+                currentStep.highlightElementAtIndex[0],
+                currentStep.highlightElementAtIndex[1],
+            );
         }
         console.log(array);
-        
-    },[currentStepIndex])
+    }, [currentStepIndex]);
     const inRange = (index: number) =>
         currentStep &&
         index >= currentStep.highlightRange[0] &&
@@ -30,7 +32,7 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
         const temp = arr[xp];
         arr[xp] = arr[yp];
         arr[yp] = temp;
-    }
+    };
     const decideColor = (index: number) => {
         return currentStep &&
             currentStep.highlightElementAtIndex.includes(index)
