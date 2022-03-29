@@ -12,10 +12,13 @@ export interface Step {
 }
 export const Main: React.FC = () => {
     const router = useRouter();
-    const DEAFULT_VALUE = 30;
-    const [amount, setAmount] = useState(DEAFULT_VALUE);
+    const DEAFULT_ARRARY_SIZE = 30;
+    const DEAFULT_SPEED = 100;
+    const [amount, setAmount] = useState(DEAFULT_ARRARY_SIZE);
+    const [speed, setSpeed] = useState(DEAFULT_SPEED);
     const [array, setArray] = useState<number[]>([]);
     const [steps, setSteps] = useState<Step[]>([]);
+    const [isSorting, setIsSorting] = useState(false);
     const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
     const [timeouts, setTimeouts] = useState<NodeJS.Timeout[]>([]);
 
@@ -30,12 +33,11 @@ export const Main: React.FC = () => {
         }
         timeouts.forEach((timeout) => clearTimeout(timeout));
         setTimeouts([]);
-
         setCurrentStepIndex(0);
         setSteps([]);
+        setIsSorting(false);
         setArray(arr);
     };
-
     const swap = (arr: number[], xp: number, yp: number) => {
         const temp = arr[xp];
         arr[xp] = arr[yp];
@@ -70,14 +72,17 @@ export const Main: React.FC = () => {
         if (timeouts.length > 0) {
             timeouts.forEach((timeout) => clearTimeout(timeout));
             setTimeouts([]);
+            setIsSorting(false);
             return;
         }
         const updateCurrentStep = (i: number): NodeJS.Timeout => {
             return setTimeout(function () {
                 setSteps([...steps]);
                 setCurrentStepIndex(i);
-            }, i * 10);
+            }, i * speed);
         };
+        setIsSorting(true);
+
         const steps = await bubbleSort([...array], array.length);
         const timeoutsArray = [];
         for (let index = 0; index < steps.length; index++) {
@@ -88,10 +93,13 @@ export const Main: React.FC = () => {
     return (
         <div className={styles.wrapper}>
             <SortingManager
-                DEAFULT_VALUE={DEAFULT_VALUE}
+                DEAFULT_AMOUNT_VALUE={DEAFULT_ARRARY_SIZE}
+                DEAFULT_SPEED_VALUE={DEAFULT_SPEED}
                 onSetAmount={setAmount}
+                onSetSpeed={setSpeed}
                 onGenerateArray={generateArray}
                 onBeginSort={sort}
+                isSorting={isSorting}
             />
             <Visualizer
                 array={array}
