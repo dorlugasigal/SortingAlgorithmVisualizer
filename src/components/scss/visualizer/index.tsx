@@ -2,7 +2,6 @@ import useWindowDimensions from "../../../hooks/windowDimension";
 import styles from "./index.module.scss";
 import React, { useEffect } from "react";
 import { Step } from "../main";
-
 type VisualizerType = {
     array: number[];
     amount: number;
@@ -37,10 +36,17 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
     const decideColor = (index: number) => {
         return currentStep &&
             currentStep.highlightElementAtIndex.includes(index)
-            ? "black"
+            ? "#8946A6"
             : inRange(index)
-            ? "green"
-            : "darkgray";
+            ? "#EA99D5"
+            : "#FFCDDD";
+    };
+
+    const calculateMarginBottom = (index: number) => {
+        return currentStep &&
+            currentStep.highlightElementAtIndex.includes(index)
+            ? amount * -0.03
+            : amount * -0.03 + 4;
     };
 
     const calculateWidth = () => {
@@ -60,7 +66,9 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
                                 height: `${item * 3 + 22}px`,
                                 width: `${calculateWidth()}px`,
                                 margin: `${amount * -0.03 + 4}px`,
-                                marginBottom: `${amount * -0.03 + 4}px`,
+                                marginBottom: `${calculateMarginBottom(
+                                    index,
+                                )}px`,
                                 backgroundColor: decideColor(index),
                                 display: "flex",
                                 justifyContent: "center",
