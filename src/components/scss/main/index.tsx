@@ -18,6 +18,7 @@ export const Main: React.FC = () => {
     const [array, setArray] = useState<number[]>([]);
     const [steps, setSteps] = useState<Step[]>([]);
     const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
+    const [timeouts, setTimeouts] = useState<NodeJS.Timeout[]>([]);
 
     useEffect(() => undefined, [router.query.sortType]);
     useEffect(() => generateArray(), []);
@@ -28,10 +29,14 @@ export const Main: React.FC = () => {
         for (let i = 0; i < amount; i++) {
             arr.push(Math.round(Math.random() * 200) + 1);
         }
+        timeouts.forEach((timeout) => clearTimeout(timeout));
+        setTimeouts([]);
+
         setCurrentStepIndex(0);
         setSteps([]);
         setArray(arr);
     };
+
     const swap = (arr: number[], xp: number, yp: number) => {
         const temp = arr[xp];
         arr[xp] = arr[yp];
@@ -41,7 +46,7 @@ export const Main: React.FC = () => {
     async function bubbleSort(arr: number[], n: number): Promise<Step[]> {
         return new Promise<Step[]>((resolve) => {
             let i: number, j: number;
-            let steps: Step[] = [];
+            const steps: Step[] = [];
             for (i = 0; i < n - 1; i++) {
                 for (j = 0; j < n - i - 1; j++) {
                     steps.push({
@@ -63,16 +68,23 @@ export const Main: React.FC = () => {
         });
     }
     const sort = async () => {
-        var steps = await bubbleSort([...array], array.length);
-        function updateCurrentStep(i: number) {
-            setTimeout(function () {
+        if (timeouts.length > 0) {
+            timeouts.forEach((timeout) => clearTimeout(timeout));
+            setTimeouts([]);
+            return;
+        }
+        const updateCurrentStep = (i: number): NodeJS.Timeout => {
+            return setTimeout(function () {
                 setSteps([...steps]);
                 setCurrentStepIndex(i);
             }, i * 10);
-        }
+        };
+        const steps = await bubbleSort([...array], array.length);
+        const timeoutsArray = [];
         for (let index = 0; index < steps.length; index++) {
-            updateCurrentStep(index);
+            timeoutsArray.push(updateCurrentStep(index));
         }
+        setTimeouts(timeoutsArray);
     };
     return (
         <div className={styles.wrapper}>
@@ -82,13 +94,6 @@ export const Main: React.FC = () => {
                 onGenerateArray={generateArray}
                 onBeginSort={sort}
             />
-            <button
-                onClick={() => {
-                    setCurrentStepIndex(currentStepIndex + 1);
-                }}
-            >
-                Hi
-            </button>
             <Visualizer
                 array={array}
                 amount={amount}
