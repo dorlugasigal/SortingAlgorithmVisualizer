@@ -44,3 +44,13 @@ jobs:
 
             - name: Run tests
               run: npm run test
+              
+            - uses: actions/checkout@v2
+              with:
+                  fetch-depth: "0"
+            - name: Bump version and push tag
+              if: github.ref_name == 'main'
+              uses: anothrNick/github-tag-action@1.36.0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  WITH_V: false
