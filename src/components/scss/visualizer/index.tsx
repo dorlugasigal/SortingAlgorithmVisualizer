@@ -1,25 +1,36 @@
 import useWindowDimensions from "../../../hooks/windowDimension";
 import styles from "./index.module.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Step } from "../main";
 type VisualizerType = {
     array: number[];
     amount: number;
-    // steps: Step[];
-    currentStep: Step;
+    steps: Step[];
+    currentStepIndex: number;
 };
 
 export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
-    const { array, amount, currentStep } = props;
+    const { array, amount, steps ,currentStepIndex} = props;
+    const currentStep = steps[currentStepIndex] ?? null;
     const { width } = useWindowDimensions();
-
+    useEffect(()=>{
+        if (currentStep && currentStep.swap)
+        {
+            swap(array,currentStep.highlightElementAtIndex[0],currentStep.highlightElementAtIndex[1])
+        }
+    },[])
     const inRange = (index: number) =>
-        currentStep.highlightRange &&
+        currentStep &&
         index >= currentStep.highlightRange[0] &&
         index <= currentStep.highlightRange[1];
 
+    const swap = (arr: number[], xp: number, yp: number) => {
+        const temp = arr[xp];
+        arr[xp] = arr[yp];
+        arr[yp] = temp;
+    }
     const decideColor = (index: number) => {
-        return currentStep.highlightElementAtIndex &&
+        return currentStep &&
             currentStep.highlightElementAtIndex.includes(index)
             ? "black"
             : inRange(index)
@@ -37,9 +48,8 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
         <div className={styles.barsContainerWrapper}>
             <div className={styles.barsContainer}>
                 {array.map((item, index) => (
-                    <div className={styles.barContainer}>
+                    <div key={index} className={styles.barContainer}>
                         <div
-                            key={index}
                             title={item.toString()}
                             style={{
                                 height: `${item * 3 + 22}px`,
