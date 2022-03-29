@@ -32,44 +32,43 @@ export const Main: React.FC = () => {
         setSteps([]);
         setArray(arr);
     };
+    const swap = (arr: number[], xp: number, yp: number) => {
+        const temp = arr[xp];
+        arr[xp] = arr[yp];
+        arr[yp] = temp;
+    };
 
-    const sort = async () => {
-        function swap(arr: number[], xp: number, yp: number) {
-            const temp = arr[xp];
-            arr[xp] = arr[yp];
-            arr[yp] = temp;
-        }
-
-        async function bubbleSort(arr: number[], n: number): Promise<Step[]> {
-            return new Promise<Step[]>((resolve) => {
-                let i: number, j: number;
-                let steps: Step[] = [];
-                for (i = 0; i < n - 1; i++) {
-                    for (j = 0; j < n - i - 1; j++) {
+    async function bubbleSort(arr: number[], n: number): Promise<Step[]> {
+        return new Promise<Step[]>((resolve) => {
+            let i: number, j: number;
+            let steps: Step[] = [];
+            for (i = 0; i < n - 1; i++) {
+                for (j = 0; j < n - i - 1; j++) {
+                    steps.push({
+                        highlightRange: [0, n - 1],
+                        highlightElementAtIndex: [j, j + 1],
+                        swap: false,
+                    });
+                    if (arr[j] > arr[j + 1]) {
+                        swap(arr, j, j + 1);
                         steps.push({
                             highlightRange: [0, n - 1],
                             highlightElementAtIndex: [j, j + 1],
-                            swap: false,
+                            swap: true,
                         });
-                        if (arr[j] > arr[j + 1]) {
-                            swap(arr, j, j + 1);
-                            steps.push({
-                                highlightRange: [0, n - 1],
-                                highlightElementAtIndex: [j, j + 1],
-                                swap: true,
-                            });
-                        }
                     }
                 }
-                resolve(steps);
-            });
-        }
+            }
+            resolve(steps);
+        });
+    }
+    const sort = async () => {
         var steps = await bubbleSort([...array], array.length);
         function updateCurrentStep(i: number) {
             setTimeout(function () {
                 setSteps([...steps]);
                 setCurrentStepIndex(i);
-            }, 1000);
+            }, i * 10);
         }
         for (let index = 0; index < steps.length; index++) {
             updateCurrentStep(index);
