@@ -19,7 +19,6 @@ export const Main: React.FC = () => {
     const [array, setArray] = useState<number[]>([]);
     const [steps, setSteps] = useState<Step[]>([]);
     const [isSorting, setIsSorting] = useState(false);
-
     const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
     const [timeouts, setTimeouts] = useState<NodeJS.Timeout[]>([]);
 
@@ -39,7 +38,6 @@ export const Main: React.FC = () => {
         setIsSorting(false);
         setArray(arr);
     };
-
     const swap = (arr: number[], xp: number, yp: number) => {
         const temp = arr[xp];
         arr[xp] = arr[yp];
@@ -84,6 +82,7 @@ export const Main: React.FC = () => {
             }, i * speed);
         };
         setIsSorting(true);
+
         const steps = await bubbleSort([...array], array.length);
         const timeoutsArray = [];
         for (let index = 0; index < steps.length; index++) {
