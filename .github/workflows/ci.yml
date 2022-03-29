@@ -53,13 +53,10 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   WITH_V: false
 
-            - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
-              uses: gonuit/heroku-docker-deploy@v1.3.3 # GitHub action name (leave it as it is).
+            - name: Deploy to Heroku
+              uses: akhileshns/heroku-deploy@v3.12.12
               with:
-                  email: ${{ secrets.HEROKU_EMAIL }}
-                  heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-                  heroku_app_name: dlg-sorting-visualizer
-                  dockerfile_directory: ./
-                  dockerfile_name: Dockerfile
-                  docker_options: "--no-cache"
-                  process_type: web
+                args: deploy --dir=build --prod
+                heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+                heroku_app_name: 'dlg-sorting-visualizer'
+                heroku_email: ${{ secrets.HEROKU_EMAIL }}
