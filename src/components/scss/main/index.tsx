@@ -4,11 +4,13 @@ import { useRouter } from "next/router";
 import { SortingManager } from "../sortingManager";
 import { Visualizer } from "../visualizer";
 import styles from "./index.module.scss";
+import { bubbleSort } from "../../../sorts/bubbleSort";
 
 export interface Step {
     highlightRange: number[];
     highlightElementAtIndex: number[];
     swap: boolean;
+    done: boolean;
 }
 export const Main: React.FC = () => {
     const router = useRouter();
@@ -38,36 +40,7 @@ export const Main: React.FC = () => {
         setIsSorting(false);
         setArray(arr);
     };
-    const swap = (arr: number[], xp: number, yp: number) => {
-        const temp = arr[xp];
-        arr[xp] = arr[yp];
-        arr[yp] = temp;
-    };
 
-    async function bubbleSort(arr: number[], n: number): Promise<Step[]> {
-        return new Promise<Step[]>((resolve) => {
-            let i: number, j: number;
-            const steps: Step[] = [];
-            for (i = 0; i < n - 1; i++) {
-                for (j = 0; j < n - i - 1; j++) {
-                    steps.push({
-                        highlightRange: [0, n - 1],
-                        highlightElementAtIndex: [j, j + 1],
-                        swap: false,
-                    });
-                    if (arr[j] > arr[j + 1]) {
-                        swap(arr, j, j + 1);
-                        steps.push({
-                            highlightRange: [0, n - 1],
-                            highlightElementAtIndex: [j, j + 1],
-                            swap: true,
-                        });
-                    }
-                }
-            }
-            resolve(steps);
-        });
-    }
     const sort = async () => {
         if (timeouts.length > 0) {
             timeouts.forEach((timeout) => clearTimeout(timeout));
@@ -75,10 +48,16 @@ export const Main: React.FC = () => {
             setIsSorting(false);
             return;
         }
-        const updateCurrentStep = (i: number): NodeJS.Timeout => {
+        const updateCurrentStep = (
+            i: number,
+            isLastIndex: boolean,
+        ): NodeJS.Timeout => {
             return setTimeout(function () {
                 setSteps([...steps]);
                 setCurrentStepIndex(i);
+                if (isLastIndex) {
+                    setIsSorting(false);
+                }
             }, i * speed);
         };
         setIsSorting(true);
@@ -86,7 +65,9 @@ export const Main: React.FC = () => {
         const steps = await bubbleSort([...array], array.length);
         const timeoutsArray = [];
         for (let index = 0; index < steps.length; index++) {
-            timeoutsArray.push(updateCurrentStep(index));
+            timeoutsArray.push(
+                updateCurrentStep(index, index == steps.length - 1),
+            );
         }
         setTimeouts(timeoutsArray);
     };
@@ -96,7 +77,7 @@ export const Main: React.FC = () => {
                 DEAFULT_AMOUNT_VALUE={DEAFULT_ARRARY_SIZE}
                 DEAFULT_SPEED_VALUE={DEAFULT_SPEED}
                 onSetAmount={setAmount}
-                onSetSpeed={setSpeed}
+                onSetSpeed={(speed) => setSpeed(300 - speed)}
                 onGenerateArray={generateArray}
                 onBeginSort={sort}
                 isSorting={isSorting}

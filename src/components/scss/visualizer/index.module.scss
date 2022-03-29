@@ -9,13 +9,21 @@
         display: flex;
         flex-direction: row;
         align-items: flex-end;
+        transform: "all 0.3s ease-in-out";
+
         .barContainer {
+            transform: "all 0.3s ease-in-out";
+
             justify-items: center;
             .barNumber {
+                transform: "all 0.3s ease-in-out";
+
                 font-family: "Courier New", Courier, monospace;
                 text-align: center;
                 color: white;
                 font-weight: bold;
+                font-size: x-large;
+                user-select: none;
             }
         }
     }
