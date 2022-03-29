@@ -2,12 +2,27 @@
     display: flex;
     justify-content: space-evenly;
     background-color: gainsboro;
-    padding: 1.7rem 5rem 0.5rem 5rem;
+    padding: 2.5rem 5rem 0.5rem 5rem;
     margin: 0 25rem;
     align-items: center;
+    border-radius: 0 0 1rem 1rem;
 
-    .slider {
-        flex: 5;
+    .slidersContainer {
+        flex: 4;
+        width: 100%;
+        .sliderContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .label {
+                margin-right: 1rem;
+                flex: 1;
+            }
+            .slider {
+                flex: 1;
+                flex: 5;
+            }
+        }
     }
     .button {
         flex: 1;

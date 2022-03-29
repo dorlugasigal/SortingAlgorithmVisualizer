@@ -1,5 +1,5 @@
 # sorting-visualizer
-
+[![ci](https://github.com/dorlugasigal/SortingAlgorithmVisualizer/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/dorlugasigal/SortingAlgorithmVisualizer/actions/workflows/ci.yml)
 
 This project was generated with [superplate](https://github.com/pankod/superplate).
 
