@@ -8,18 +8,10 @@ export const Header: React.FC = () => {
 
     return (
         <div className={styles.header}>
-            <Logo withTitle />
+            <div className={styles.logo}>
+                <Logo withTitle />
+            </div>
             <>
-                <a
-                    onClick={() =>
-                        router.push("/?sortType=binary", undefined, {
-                            shallow: true,
-                        })
-                    }
-                >
-                    Value 1
-                </a>
-
                 <a
                     onClick={() =>
                         router.push("/?sortType=bubble", undefined, {
@@ -27,7 +19,17 @@ export const Header: React.FC = () => {
                         })
                     }
                 >
-                    Value 2
+                    Bubble Sort
+                </a>
+
+                <a
+                    onClick={() =>
+                        router.push("/?sortType=quick", undefined, {
+                            shallow: true,
+                        })
+                    }
+                >
+                    Quick Sort
                 </a>
             </>
         </div>

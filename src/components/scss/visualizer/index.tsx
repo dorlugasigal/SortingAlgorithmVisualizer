@@ -13,6 +13,10 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
     const { array, amount, steps, currentStepIndex } = props;
     const currentStep = steps[currentStepIndex] ?? null;
     const { width } = useWindowDimensions();
+    const NOT_ACTIVE_COLOR = "#C582D5";
+    const DARK_COLOR = "#71397C";
+    const ACTIVE_COLOR = "#91519D";
+    const COMPARING__COLOR = "#FFDF5A";
     useEffect(() => {
         if (currentStep && currentStep.swap) {
             swap(
@@ -34,18 +38,28 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
         arr[yp] = temp;
     };
     const decideColor = (index: number) => {
-        return currentStep &&
-            currentStep.highlightElementAtIndex.includes(index)
-            ? "#8946A6"
+        return currentStep && currentStep.done
+            ? "#70d16a"
+            : currentStep && currentStep.highlightElementAtIndex.includes(index)
+            ? COMPARING__COLOR
             : inRange(index)
-            ? "#EA99D5"
-            : "#FFCDDD";
+            ? ACTIVE_COLOR
+            : NOT_ACTIVE_COLOR;
+    };
+
+    const decideBarNumberColor = (index: number) => {
+        return currentStep && currentStep.done
+            ? "#FFF"
+            : currentStep && currentStep.highlightElementAtIndex.includes(index)
+            ? DARK_COLOR
+            : "#FFF";
     };
 
     const calculateMarginBottom = (index: number) => {
-        return currentStep &&
-            currentStep.highlightElementAtIndex.includes(index)
-            ? amount * -0.03
+        return currentStep && currentStep.done
+            ? amount * -0.03 + 4
+            : currentStep && currentStep.highlightElementAtIndex.includes(index)
+            ? amount * -0.03 - 14
             : amount * -0.03 + 4;
     };
 
@@ -55,6 +69,7 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
             2 * (amount * -0.03 + 4);
         return widthCalculated;
     };
+
     return (
         <div className={styles.barsContainerWrapper}>
             <div className={styles.barsContainer}>
@@ -63,12 +78,14 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
                         <div
                             title={item.toString()}
                             style={{
-                                height: `${item * 3 + 22}px`,
+                                height: `${item * 3 + 30}px`,
                                 width: `${calculateWidth()}px`,
                                 margin: `${amount * -0.03 + 4}px`,
                                 marginBottom: `${calculateMarginBottom(
                                     index,
                                 )}px`,
+                                transform: "all 0.3s ease-in-out",
+                                borderRadius: "2.5rem 2.5rem 0 0",
                                 backgroundColor: decideColor(index),
                                 display: "flex",
                                 justifyContent: "center",
@@ -76,7 +93,14 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
                             }}
                         >
                             {amount <= 40 && (
-                                <div className={styles.barNumber}>{item}</div>
+                                <div
+                                    style={{
+                                        color: decideBarNumberColor(index),
+                                    }}
+                                    className={styles.barNumber}
+                                >
+                                    {item}
+                                </div>
                             )}
                         </div>
                     </div>

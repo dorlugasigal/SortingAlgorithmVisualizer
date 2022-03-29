@@ -54,6 +54,7 @@ jobs:
                   WITH_V: false
 
             - name: Deploy to Heroku
+              if: github.ref_name == 'main'
               uses: akhileshns/heroku-deploy@v3.12.12
               with:
                 args: deploy --dir=build --prod
