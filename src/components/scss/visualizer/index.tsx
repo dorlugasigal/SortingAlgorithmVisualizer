@@ -18,7 +18,9 @@ export const Visualizer: React.FC<VisualizerType> = ({ ...props }) => {
         {
             swap(array,currentStep.highlightElementAtIndex[0],currentStep.highlightElementAtIndex[1])
         }
-    },[])
+        console.log(array);
+        
+    },[currentStepIndex])
     const inRange = (index: number) =>
         currentStep &&
         index >= currentStep.highlightRange[0] &&

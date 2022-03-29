@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { SortingManager } from "../sortingManager";
 import { Visualizer } from "../visualizer";
 import styles from "./index.module.scss";
+import { StepsProps } from "antd";
 
 export interface Step {
     highlightRange: number[];
@@ -32,42 +33,46 @@ export const Main: React.FC = () => {
         setArray(arr);
     };
 
-    const sort = () => {
+    const sort = async () => {
         function swap(arr: number[], xp: number, yp: number) {
             const temp = arr[xp];
             arr[xp] = arr[yp];
             arr[yp] = temp;
         }
 
-        function bubbleSort(arr: number[], n: number) {
-            let i: number, j: number;
-            let steps: Step[] = [];
-            for (i = 0; i < n - 1; i++) {
-                for (j = 0; j < n - i - 1; j++) {
-                    setTimeout(() => {
+        async function bubbleSort(arr: number[], n: number): Promise<Step[]> {
+            return new Promise<Step[]>((resolve) => {
+                let i: number, j: number;
+                let steps: Step[] = [];
+                for (i = 0; i < n - 1; i++) {
+                    for (j = 0; j < n - i - 1; j++) {
                         steps.push({
                             highlightRange: [0, n - 1],
                             highlightElementAtIndex: [j, j + 1],
-                            swap: false
+                            swap: false,
                         });
-                    }, 1000);
-                    if (arr[j] > arr[j + 1]) {
-                        swap(arr, j, j + 1);
-                        steps.push({
-                            highlightRange: [0, n - 1],
-                            highlightElementAtIndex: [j, j + 1],
-                            swap: true
-                        });
+                        if (arr[j] > arr[j + 1]) {
+                            swap(arr, j, j + 1);
+                            steps.push({
+                                highlightRange: [0, n - 1],
+                                highlightElementAtIndex: [j, j + 1],
+                                swap: true,
+                            });
+                        }
                     }
                 }
-            }
-            setSteps(steps)
+                resolve(steps);
+            });
         }
-        bubbleSort([...array], array.length);
-        for (let index = 0; index < steps.length; index++) {
-            setTimeout(() => {
-                setCurrentStepIndex(index)
+        var steps = await bubbleSort([...array], array.length);
+        function updateCurrentStep(i: number) {
+            setTimeout(function () {
+                setSteps([...steps]);
+                setCurrentStepIndex(i);
             }, 1000);
+        }
+        for (let index = 0; index < steps.length; index++) {
+            updateCurrentStep(index);
         }
     };
     return (
@@ -78,6 +83,13 @@ export const Main: React.FC = () => {
                 onGenerateArray={generateArray}
                 onBeginSort={sort}
             />
+            <button
+                onClick={() => {
+                    setCurrentStepIndex(currentStepIndex + 1);
+                }}
+            >
+                Hi
+            </button>
             <Visualizer
                 array={array}
                 amount={amount}
