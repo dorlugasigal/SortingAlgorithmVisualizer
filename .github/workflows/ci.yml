@@ -56,10 +56,10 @@ jobs:
                   WITH_V: false
               
             - name: Install Heroku Cli
-            - run: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+              run: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
             
             - name: Build and Deploy
-            - run: npm run build --if-present
+              run: npm run build --if-present
               
             - uses: akhileshns/heroku-deploy@v3.12.12 
               if: github.ref_name == 'main'
