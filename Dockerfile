@@ -1,4 +1,4 @@
-FROM node:16-alpine AS builder
+FROM node:17-alpine AS builder
 RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
@@ -6,7 +6,7 @@ COPY . .
 
 RUN npx next build
 
-FROM node:16-alpine AS runner
+FROM node:17-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
