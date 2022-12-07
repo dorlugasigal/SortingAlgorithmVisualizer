@@ -4,9 +4,6 @@
 
 This is a WORK IN PROGRESS project, being developed in my free time
 
-## Preview
-[Heroku](https://dlg-sorting-visualizer.herokuapp.com/)
-
 # TO-DO
 - a better design
 - add quick sort
